@@ -59,7 +59,6 @@ syn keyword pbRepeat     optional required repeated
 syn keyword pbDefault    default
 syn keyword pbExtend     extend extensions to max reserved
 syn keyword pbRPC        service rpc returns
-syn keyword pbStream     stream
 
 syn keyword pbType      int32 int64 uint32 uint64 sint32 sint64
 syn keyword pbType      fixed32 fixed64 sfixed32 sfixed64
@@ -70,10 +69,10 @@ syn keyword pbBool      true false
 syn match   pbInt     /-\?\<\d\+\>/
 syn match   pbInt     /\<0[xX]\x+\>/
 syn match   pbFloat   /\<-\?\d*\(\.\d*\)\?/
-syn region  pbComment start="\/\*" end="\*\/" contains=@pbCommentGrp
-syn region  pbComment start="//" skip="\\$" end="$" keepend contains=@pbCommentGrp
-syn region  pbString  start=/"/ skip=/\\./ end=/"/
-syn region  pbString  start=/'/ skip=/\\./ end=/'/
+syn region  pbComment start="\/\*" end="\*\/" contains=@pbCommentGrp,@Spell
+syn region  pbComment start="//" skip="\\$" end="$" keepend contains=@pbCommentGrp,@Spell
+syn region  pbString  start=/"/ skip=/\\./ end=/"/ contains=@Spell
+syn region  pbString  start=/'/ skip=/\\./ end=/'/ contains=@Spell
 
 if version >= 508 || !exists("did_proto_syn_inits")
   if version < 508
@@ -91,7 +90,6 @@ if version >= 508 || !exists("did_proto_syn_inits")
   HiLink pbDefault      Keyword
   HiLink pbExtend       Keyword
   HiLink pbRPC          Keyword
-  HiLink pbStream       Keyword
   HiLink pbType         Type
   HiLink pbTypedef      Typedef
   HiLink pbBool         Boolean
